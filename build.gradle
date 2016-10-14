@@ -1,0 +1,37 @@
+group 'com.sergeymild'
+version '1.0.2'
+
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+}
+
+apply plugin: 'groovy'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+    compile 'org.aspectj:aspectjtools:1.8.9'
+    compile 'org.aspectj:aspectjrt:1.8.9'
+    compile 'com.android.tools.build:gradle:2.1.2'
+}
+
+apply plugin: 'maven'
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.allJava
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: uri('/Users/user/.m2/repository'))
+        }
+    }
+}
